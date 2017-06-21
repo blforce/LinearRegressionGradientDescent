@@ -1,0 +1,9 @@
+{
+  "name": "intro_to_the_math_of_intelligence",
+  "version": "0.0.0",
+  "description": "Intro_to_the_Math_of_intelligence",
+  "main": "app.js",
+  "author": {
+    "name": "Ben"
+  }
+}
