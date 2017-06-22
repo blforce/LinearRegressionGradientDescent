@@ -3,6 +3,14 @@
 Behold, a simple implementation of Gradient Descent! If you want to see a live demo, 
 I have one [here](https://codepen.io/theBenForce/details/jwwEvb).
 
+## Getting Started
+Make sure you have node and npm installed, then clone the repo and open a terminal in the 
+root directory (where package.json is). Now run the following commands:
+```bash
+npm install
+node app.js
+```
+
 ## app.js
 
 The `app.js` file handles four things: setting hyperparameters, defining callback methods, 
