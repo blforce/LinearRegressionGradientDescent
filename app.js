@@ -4,9 +4,9 @@ var fs = require('fs');
 var parse = require('csv-parse/lib/sync');
 var regression = require('./linear-regression');
 
-var fileName = 'data/kc_house_data.csv';
+var fileName = 'data/movie_metadata.csv';
 var records = [];
-var rate = 0.001;
+var rate = 0.00001;
 var steps = 1000;
 
 function onCompleted(m, b) {
@@ -25,7 +25,7 @@ fs.readFile(fileName, function (err, data) {
     }
     records = parse(data, { columns: true });
 
-    regression.Optimize(records, 'bedrooms', 'price',
+    regression.Optimize(records, 'num_critic_for_reviews', 'gross',
                         steps, rate,
                         onCompleted, onStep);
 });

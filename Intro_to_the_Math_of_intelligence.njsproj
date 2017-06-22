@@ -30,8 +30,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="linear-regression.js" />
-    <Content Include="data\data.csv" />
-    <Content Include="data\kc_house_data.csv" />
+    <Content Include="data\movie_metadata.csv" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
