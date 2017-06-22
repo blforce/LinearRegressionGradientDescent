@@ -9,12 +9,10 @@ function stepGradient(b, m, points, rate) {
     var N = points.length;
     var constant = (2.0 / N);
 
-    for (var i = 0; i < N; i++) {
-        var point = points[i];
-
+    points.forEach(function (point) {
         mGradient -= constant * (point.y - ((m * point.x) + b)) * point.x;
         bGradient -= constant * (point.y - ((m * point.x) + b));
-    }
+    });
 
     mResult = m - (rate * mGradient);
     bResult = b - (rate * bGradient);
@@ -29,7 +27,11 @@ function Optimize(data, x_col, y_col, iterations, rate, onComplete, stepComplete
     var points = [];
 
     data.forEach(function (record) {
-        points.push({ x: Number(record[x_col]), y: Number(record[y_col])});
+        var nextX = Number(record[x_col]);
+        var nextY = Number(record[y_col]);
+
+        if (isNaN(nextX) || isNaN(nextY)) return;
+        points.push({ x: nextX, y: nextY });
     });
 
     for (var i = 0; i < iterations; i++) {
@@ -42,6 +44,6 @@ function Optimize(data, x_col, y_col, iterations, rate, onComplete, stepComplete
     }
 
     onComplete(m, b);
-};
+}
 
 exports.Optimize = Optimize;
