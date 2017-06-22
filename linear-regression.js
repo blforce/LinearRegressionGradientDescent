@@ -2,7 +2,7 @@
 if(typeof exports === 'undefined')
     exports = {};
 
-function stepGradient(b, m, points, rate) {
+function StepGradient(b, m, points, rate) {
     var bGradient = 0;
     var mGradient = 0;
 
@@ -26,6 +26,7 @@ function Optimize(data, x_col, y_col, iterations, rate, onComplete, stepComplete
 
     var points = [];
 
+    // Make sure points are numeric values with x and y as the keys.
     data.forEach(function (record) {
         var nextX = Number(record[x_col]);
         var nextY = Number(record[y_col]);
@@ -34,8 +35,9 @@ function Optimize(data, x_col, y_col, iterations, rate, onComplete, stepComplete
         points.push({ x: nextX, y: nextY });
     });
 
+    
     for (var i = 0; i < iterations; i++) {
-        var result = stepGradient(b, m, points, rate);
+        var result = StepGradient(b, m, points, rate);
         m = result[0];
         b = result[1];
 
