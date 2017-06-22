@@ -1,5 +1,5 @@
 
-if(exports == null)
+if(typeof exports === 'undefined')
     exports = {};
 
 function stepGradient(b, m, points, rate) {
