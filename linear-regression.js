@@ -1,4 +1,6 @@
 
+if(exports == null)
+    exports = {};
 
 function stepGradient(b, m, points, rate) {
     var bGradient = 0;
@@ -20,7 +22,7 @@ function stepGradient(b, m, points, rate) {
     return [mResult, bResult];
 }
 
-exports.Optimize = function (data, x_col, y_col, iterations, rate, onComplete, stepComplete) {
+function Optimize(data, x_col, y_col, iterations, rate, onComplete, stepComplete) {
     var b = 0.0;
     var m = 0.0;
 
@@ -41,3 +43,5 @@ exports.Optimize = function (data, x_col, y_col, iterations, rate, onComplete, s
 
     onComplete(m, b);
 };
+
+exports.Optimize = Optimize;
