@@ -5,5 +5,8 @@
   "main": "app.js",
   "author": {
     "name": "Ben"
+  },
+  "dependencies": {
+    "csv-parse": "^1.2.0"
   }
 }
