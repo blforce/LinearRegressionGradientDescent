@@ -1,7 +1,6 @@
 
-var rate = 0.0001;
 
-function stepGradient(b, m, points) {
+function stepGradient(b, m, points, rate) {
     var bGradient = 0;
     var mGradient = 0;
 
@@ -11,17 +10,17 @@ function stepGradient(b, m, points) {
     for (var i = 0; i < N; i++) {
         var point = points[i];
 
-        bGradient -= constant * (point.y - ((m * point.x) + b));
         mGradient -= constant * (point.y - ((m * point.x) + b)) * point.x;
+        bGradient -= constant * (point.y - ((m * point.x) + b));
     }
 
-    bResult = b - (rate * bGradient);
     mResult = m - (rate * mGradient);
+    bResult = b - (rate * bGradient);
 
-    return [bResult, mResult];
+    return [mResult, bResult];
 }
 
-exports.Optimize = function (data, x_col, y_col, iterations, callback) {
+exports.Optimize = function (data, x_col, y_col, iterations, rate, onComplete, stepComplete) {
     var b = 0.0;
     var m = 0.0;
 
@@ -32,10 +31,13 @@ exports.Optimize = function (data, x_col, y_col, iterations, callback) {
     });
 
     for (var i = 0; i < iterations; i++) {
-        var result = stepGradient(b, m, points);
-        b = result[0];
-        m = result[1];
+        var result = stepGradient(b, m, points, rate);
+        m = result[0];
+        b = result[1];
+
+        if (stepComplete != null)
+            stepComplete(m, b, i);
     }
 
-    callback(m, b);
+    onComplete(m, b);
 };
