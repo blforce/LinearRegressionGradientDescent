@@ -1,7 +1,7 @@
 
-var rate = 0.001;
+var rate = 0.0001;
 
-function stepGradient(b, m, points, rate) {
+function stepGradient(b, m, points) {
     var bGradient = 0;
     var mGradient = 0;
 
@@ -9,11 +9,10 @@ function stepGradient(b, m, points, rate) {
     var constant = (2.0 / N);
 
     for (var i = 0; i < N; i++) {
-        x = points[i][0];
-        y = points[i][1];
+        var point = points[i];
 
-        bGradient -= constant * (y - ((m * x) + b));
-        mGradient -= constant * (y - ((m * x) + b)) * x;
+        bGradient -= constant * (point.y - ((m * point.x) + b));
+        mGradient -= constant * (point.y - ((m * point.x) + b)) * point.x;
     }
 
     bResult = b - (rate * bGradient);
@@ -29,11 +28,11 @@ exports.Optimize = function (data, x_col, y_col, iterations, callback) {
     var points = [];
 
     data.forEach(function (record) {
-        points.push([record[x_col], record[y_col]]);
+        points.push({ x: Number(record[x_col]), y: Number(record[y_col])});
     });
 
     for (var i = 0; i < iterations; i++) {
-        var result = stepGradient(b, m, points, rate);
+        var result = stepGradient(b, m, points);
         b = result[0];
         m = result[1];
     }
